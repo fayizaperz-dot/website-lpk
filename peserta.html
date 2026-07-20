@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal Data Peserta | LPK Universitas Muhammadiyah Maumere</title>
+<link rel="icon" href="assets/logo-lpk.jpeg">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-links"><span>📞 (0382) 000-000</span><span>✉️ lpk@um-maumere.ac.id</span><span>📍 Maumere, Sikka, NTT</span></div>
+    <div class="topbar-links"><a href="pendaftaran.html">Daftar Pelatihan</a><a href="peserta.html">Portal Admin</a></div>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="nav-wrap">
+    <a href="index.html" class="brand">
+      <img src="assets/logo-lpk.jpeg" alt="Logo LPK Universitas Muhammadiyah Maumere">
+      <div class="brand-text"><div class="brand-name">LPK Universitas Muhammadiyah</div><div class="brand-sub">Maumere · Building Future Competencies</div></div>
+    </a>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html" class="nav-link">Beranda</a></li>
+        <li><a href="tentang.html" class="nav-link">Profil ▾</a>
+          <div class="dropdown"><a href="tentang.html#visi-misi">Visi &amp; Misi</a><a href="tentang.html#struktur">Struktur Organisasi</a><a href="tentang.html#tujuan">Tujuan Lembaga</a></div>
+        </li>
+        <li><a href="skema.html" class="nav-link">Program Pelatihan</a></li>
+        <li><a href="jadwal.html" class="nav-link">Jadwal &amp; Prosedur</a></li>
+        <li><a href="kontak.html" class="nav-link">Kontak</a></li>
+        <li><a href="pendaftaran.html" class="nav-link nav-cta">Daftar Sekarang</a></li>
+      </ul>
+    </nav>
+    <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Beranda</a> / <span>Portal Data Peserta</span></div>
+    <h1>Portal Data Peserta (Admin)</h1>
+    <p style="color:#C7D0E6;max-width:640px;">Kelola data pendaftar: tinjau, ubah status verifikasi, hapus, atau ekspor data peserta pelatihan.</p>
+  </div>
+</section>
+<div class="interlock-divider"></div>
+
+<!-- ===================== GERBANG LOGIN ADMIN ===================== -->
+<section class="bg-white" id="gateSection">
+  <div class="container">
+    <div class="login-gate">
+      <div class="card">
+        <div class="icon-box">🔒</div>
+        <h3>Masuk sebagai Admin</h3>
+        <p style="font-size:.88rem;">Masukkan kata sandi admin untuk mengakses data peserta. Kata sandi default: <strong>admin123</strong> (dapat diganti setelah masuk).</p>
+        <div class="alert alert-danger" id="alertLoginGagal">⚠️ Kata sandi salah, silakan coba lagi.</div>
+        <div class="field">
+          <label for="passAdmin">Kata Sandi</label>
+          <input type="password" id="passAdmin" placeholder="Masukkan kata sandi">
+        </div>
+        <button class="btn btn-navy" id="btnLogin" style="width:100%;justify-content:center;">Masuk Portal →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== KONTEN ADMIN (setelah login) ===================== -->
+<section class="bg-white" id="adminSection" style="display:none;padding-top:0;">
+  <div class="container">
+
+    <div class="summary-cards">
+      <div class="summary-card"><div class="num" id="sumTotal">0</div><div class="lbl">Total Pendaftar</div></div>
+      <div class="summary-card"><div class="num" id="sumMenunggu">0</div><div class="lbl">Menunggu Verifikasi</div></div>
+      <div class="summary-card"><div class="num" id="sumDiterima">0</div><div class="lbl">Diterima</div></div>
+      <div class="summary-card"><div class="num" id="sumDitolak">0</div><div class="lbl">Ditolak</div></div>
+    </div>
+
+    <div class="table-toolbar">
+      <div class="filters">
+        <input type="text" id="cariPeserta" placeholder="Cari nama / email / NIK...">
+        <select id="filterStatus">
+          <option value="">Semua Status</option>
+          <option>Menunggu Verifikasi</option>
+          <option>Diterima</option>
+          <option>Ditolak</option>
+        </select>
+        <select id="filterProgram"><option value="">Semua Program</option></select>
+      </div>
+      <div class="filters">
+        <button class="btn btn-ghost btn-sm" id="btnContoh">+ Isi Data Contoh</button>
+        <button class="btn btn-ghost btn-sm" id="btnCSV">⬇ Ekspor CSV</button>
+        <button class="btn btn-ghost btn-sm" id="btnJSON">⬇ Ekspor JSON</button>
+        <button class="btn btn-danger btn-sm" id="btnHapusSemua">🗑 Hapus Semua</button>
+        <button class="btn btn-ghost btn-sm" id="btnLogout">Keluar</button>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>No. Pendaftaran</th><th>Nama</th><th>Kontak</th><th>Program</th>
+            <th>Tgl Daftar</th><th>Status</th><th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="tbodyPeserta"></tbody>
+      </table>
+      <div class="empty-state" id="emptyState" style="display:none;">
+        <div style="font-size:2.4rem;">🗂️</div>
+        <p>Belum ada data peserta. Data akan otomatis muncul setelah ada yang mengisi formulir pendaftaran, atau klik "Isi Data Contoh" untuk demo.</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:24px;">
+      <h3 style="font-size:.95rem;">Ganti Kata Sandi Admin</h3>
+      <div class="form-grid">
+        <div class="field"><label>Kata Sandi Lama</label><input type="password" id="passLama"></div>
+        <div class="field"><label>Kata Sandi Baru</label><input type="password" id="passBaru"></div>
+      </div>
+      <button class="btn btn-ghost btn-sm" id="btnGantiPass">Perbarui Kata Sandi</button>
+      <p class="hint" style="margin-top:10px;">Catatan: penyimpanan ini bersifat lokal di browser (localStorage), cocok untuk kebutuhan demo/akademik. Untuk penggunaan produksi yang aman, sambungkan ke backend dan database sungguhan.</p>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><img src="assets/logo-lpk.jpeg" alt="Logo LPK"><div class="name">LPK Universitas<br>Muhammadiyah Maumere</div></div>
+        <p style="font-size:.86rem;">Lembaga Pelatihan Kerja di bawah naungan Universitas Muhammadiyah Maumere, berkomitmen mencetak tenaga kerja kompeten dan berdaya saing.</p>
+        <div class="social-row"><a href="#">FB</a><a href="#">IG</a><a href="#">YT</a></div>
+      </div>
+      <div><h4>Navigasi</h4><ul><li><a href="index.html">Beranda</a></li><li><a href="tentang.html">Profil Lembaga</a></li><li><a href="skema.html">Program Pelatihan</a></li><li><a href="jadwal.html">Jadwal &amp; Prosedur</a></li></ul></div>
+      <div><h4>Layanan</h4><ul><li><a href="pendaftaran.html">Pendaftaran Online</a></li><li><a href="peserta.html">Portal Data Peserta</a></li><li><a href="kontak.html">Hubungi Kami</a></li></ul></div>
+      <div><h4>Alamat</h4><div class="contact-line">📍 Jl. Kesehatan, Kel. Kota Uneng, Kec. Alok, Kab. Sikka, Maumere, NTT</div><div class="contact-line">📞 (0382) 000-000</div><div class="contact-line">✉️ lpk@um-maumere.ac.id</div></div>
+    </div>
+    <div class="bottom-bar"><span>© <span class="tahun-berjalan"></span> LPK Universitas Muhammadiyah Maumere. Seluruh hak cipta dilindungi.</span></div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/main.js"></script>
+<script>
+  const gateSection = document.getElementById("gateSection");
+  const adminSection = document.getElementById("adminSection");
+
+  function tampilkanAdmin(){
+    gateSection.style.display = "none";
+    adminSection.style.display = "block";
+    inisialisasiFilterProgram();
+    renderTabel();
+  }
+
+  if(AdminAuth.isLoggedIn()) tampilkanAdmin();
+
+  document.getElementById("btnLogin").addEventListener("click", cobaLogin);
+  document.getElementById("passAdmin").addEventListener("keydown", (e) => { if(e.key === "Enter") cobaLogin(); });
+
+  function cobaLogin(){
+    const pass = document.getElementById("passAdmin").value;
+    if(AdminAuth.login(pass)){ tampilkanAdmin(); }
+    else{ document.getElementById("alertLoginGagal").classList.add("show"); }
+  }
+
+  document.getElementById("btnLogout").addEventListener("click", () => {
+    AdminAuth.logout();
+    location.reload();
+  });
+
+  document.getElementById("btnGantiPass").addEventListener("click", () => {
+    const lama = document.getElementById("passLama").value;
+    const baru = document.getElementById("passBaru").value;
+    if(!baru || baru.length < 4){ alert("Kata sandi baru minimal 4 karakter."); return; }
+    if(AdminAuth.ubahPassword(lama, baru)){
+      alert("Kata sandi berhasil diperbarui.");
+      document.getElementById("passLama").value = "";
+      document.getElementById("passBaru").value = "";
+    }else{
+      alert("Kata sandi lama tidak sesuai.");
+    }
+  });
+
+  function inisialisasiFilterProgram(){
+    const sel = document.getElementById("filterProgram");
+    DAFTAR_PROGRAM.forEach(p => { sel.innerHTML += `<option value="${p.nama}">${p.nama}</option>`; });
+  }
+
+  function badgeStatus(status){
+    if(status === "Diterima") return `<span class="badge badge-success">Diterima</span>`;
+    if(status === "Ditolak") return `<span class="badge badge-danger">Ditolak</span>`;
+    return `<span class="badge badge-warning">Menunggu Verifikasi</span>`;
+  }
+
+  function renderTabel(){
+    const q = document.getElementById("cariPeserta").value.toLowerCase();
+    const statusF = document.getElementById("filterStatus").value;
+    const programF = document.getElementById("filterProgram").value;
+
+    const semua = PesertaDB.ambilSemua();
+    const hasil = semua.filter(p =>
+      (p.nama.toLowerCase().includes(q) || (p.email||"").toLowerCase().includes(q) || (p.nik||"").includes(q)) &&
+      (statusF === "" || p.status === statusF) &&
+      (programF === "" || p.program === programF)
+    );
+
+    document.getElementById("sumTotal").textContent = semua.length;
+    document.getElementById("sumMenunggu").textContent = semua.filter(p=>p.status==="Menunggu Verifikasi").length;
+    document.getElementById("sumDiterima").textContent = semua.filter(p=>p.status==="Diterima").length;
+    document.getElementById("sumDitolak").textContent = semua.filter(p=>p.status==="Ditolak").length;
+
+    const tbody = document.getElementById("tbodyPeserta");
+    document.getElementById("emptyState").style.display = semua.length === 0 ? "block" : "none";
+
+    tbody.innerHTML = hasil.map(p => `
+      <tr>
+        <td style="font-family:var(--font-mono);font-size:.78rem;">${p.id}</td>
+        <td><strong>${p.nama}</strong><br><span style="font-size:.76rem;color:var(--ink-soft);">${p.pendidikan||"-"}</span></td>
+        <td>${p.hp||"-"}<br><span style="font-size:.76rem;color:var(--ink-soft);">${p.email||"-"}</span></td>
+        <td>${p.program||"-"}</td>
+        <td>${new Date(p.tanggalDaftar).toLocaleDateString("id-ID",{day:"2-digit",month:"short",year:"numeric"})}</td>
+        <td>
+          <select class="statusSelect" data-id="${p.id}" style="padding:6px 10px;border-radius:8px;border:1px solid var(--line);font-size:.78rem;">
+            <option ${p.status==="Menunggu Verifikasi"?"selected":""}>Menunggu Verifikasi</option>
+            <option ${p.status==="Diterima"?"selected":""}>Diterima</option>
+            <option ${p.status==="Ditolak"?"selected":""}>Ditolak</option>
+          </select>
+        </td>
+        <td class="row-actions">
+          <button class="icon-btn" title="Lihat detail" data-detail="${p.id}">👁</button>
+          <button class="icon-btn danger" title="Hapus" data-hapus="${p.id}">🗑</button>
+        </td>
+      </tr>
+    `).join("");
+
+    document.querySelectorAll(".statusSelect").forEach(sel => {
+      sel.addEventListener("change", (e) => {
+        PesertaDB.updateStatus(e.target.dataset.id, e.target.value);
+        renderTabel();
+      });
+    });
+    document.querySelectorAll("[data-hapus]").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        if(confirm("Hapus data peserta ini secara permanen?")){
+          PesertaDB.hapus(e.target.dataset.hapus);
+          renderTabel();
+        }
+      });
+    });
+    document.querySelectorAll("[data-detail]").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        const p = PesertaDB.ambilSemua().find(x => x.id === e.target.dataset.detail);
+        if(!p) return;
+        alert(
+          `No. Pendaftaran : ${p.id}\n`+
+          `Nama            : ${p.nama}\n`+
+          `NIK             : ${p.nik}\n`+
+          `Jenis Kelamin   : ${p.jkel}\n`+
+          `TTL             : ${p.tempatLahir}, ${p.tglLahir}\n`+
+          `Alamat          : ${p.alamat}\n`+
+          `HP              : ${p.hp}\n`+
+          `Email           : ${p.email}\n`+
+          `Pendidikan      : ${p.pendidikan}\n`+
+          `Program         : ${p.program}\n`+
+          `Gelombang       : ${p.gelombang||"-"}\n`+
+          `Dokumen         : ${p.dokumen||"-"}\n`+
+          `Status          : ${p.status}`
+        );
+      });
+    });
+  }
+
+  document.getElementById("cariPeserta").addEventListener("input", renderTabel);
+  document.getElementById("filterStatus").addEventListener("change", renderTabel);
+  document.getElementById("filterProgram").addEventListener("change", renderTabel);
+  document.getElementById("btnCSV").addEventListener("click", () => PesertaDB.eksporCSV());
+  document.getElementById("btnJSON").addEventListener("click", () => PesertaDB.eksporJSON());
+  document.getElementById("btnContoh").addEventListener("click", () => { PesertaDB.isiContoh(); renderTabel(); });
+  document.getElementById("btnHapusSemua").addEventListener("click", () => {
+    if(confirm("Yakin ingin menghapus SELURUH data peserta? Tindakan ini tidak dapat dibatalkan.")){
+      PesertaDB.hapusSemua();
+      renderTabel();
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pendaftaran Online | LPK Universitas Muhammadiyah Maumere</title>
+<link rel="icon" href="assets/logo-lpk.jpeg">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-links"><span>📞 (0382) 000-000</span><span>✉️ lpk@um-maumere.ac.id</span><span>📍 Maumere, Sikka, NTT</span></div>
+    <div class="topbar-links"><a href="pendaftaran.html">Daftar Pelatihan</a><a href="peserta.html">Portal Admin</a></div>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="nav-wrap">
+    <a href="index.html" class="brand">
+      <img src="assets/logo-lpk.jpeg" alt="Logo LPK Universitas Muhammadiyah Maumere">
+      <div class="brand-text"><div class="brand-name">LPK Universitas Muhammadiyah</div><div class="brand-sub">Maumere · Building Future Competencies</div></div>
+    </a>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html" class="nav-link">Beranda</a></li>
+        <li><a href="tentang.html" class="nav-link">Profil ▾</a>
+          <div class="dropdown"><a href="tentang.html#visi-misi">Visi &amp; Misi</a><a href="tentang.html#struktur">Struktur Organisasi</a><a href="tentang.html#tujuan">Tujuan Lembaga</a></div>
+        </li>
+        <li><a href="skema.html" class="nav-link">Program Pelatihan</a></li>
+        <li><a href="jadwal.html" class="nav-link">Jadwal &amp; Prosedur</a></li>
+        <li><a href="kontak.html" class="nav-link">Kontak</a></li>
+        <li><a href="pendaftaran.html" class="nav-link nav-cta active">Daftar Sekarang</a></li>
+      </ul>
+    </nav>
+    <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Beranda</a> / <span>Pendaftaran Online</span></div>
+    <h1>Formulir Pendaftaran Peserta</h1>
+    <p style="color:#C7D0E6;max-width:640px;">Lengkapi data di bawah ini dengan benar. Data Anda akan tersimpan otomatis dan dapat ditinjau oleh admin melalui Portal Data Peserta.</p>
+  </div>
+</section>
+<div class="interlock-divider"></div>
+
+<section class="bg-white">
+  <div class="container">
+    <div style="max-width:820px;margin:0 auto;">
+
+      <div class="alert alert-success" id="alertSukses">✅ Pendaftaran berhasil disimpan! Nomor pendaftaran Anda: <strong id="noPendaftaran"></strong></div>
+      <div class="alert alert-danger" id="alertGagal">⚠️ Mohon periksa kembali formulir, terdapat data yang belum sesuai.</div>
+
+      <form class="form-panel" id="formPendaftaran" novalidate>
+        <h3 style="margin-bottom:4px;">1. Data Pribadi</h3>
+        <p style="font-size:.85rem;margin-bottom:20px;">Isi sesuai dokumen identitas resmi Anda.</p>
+        <div class="form-grid">
+          <div class="field full">
+            <label for="nama">Nama Lengkap *</label>
+            <input type="text" id="nama" required placeholder="Sesuai KTP">
+            <div class="error-msg">Nama lengkap wajib diisi.</div>
+          </div>
+          <div class="field">
+            <label for="nik">NIK (16 digit) *</label>
+            <input type="text" id="nik" required maxlength="16" inputmode="numeric" placeholder="16 digit angka">
+            <div class="error-msg">NIK harus 16 digit angka.</div>
+          </div>
+          <div class="field">
+            <label for="jkel">Jenis Kelamin *</label>
+            <select id="jkel" required>
+              <option value="">Pilih...</option>
+              <option>Laki-laki</option>
+              <option>Perempuan</option>
+            </select>
+            <div class="error-msg">Pilih jenis kelamin.</div>
+          </div>
+          <div class="field">
+            <label for="tempatLahir">Tempat Lahir *</label>
+            <input type="text" id="tempatLahir" required placeholder="Contoh: Maumere">
+            <div class="error-msg">Tempat lahir wajib diisi.</div>
+          </div>
+          <div class="field">
+            <label for="tglLahir">Tanggal Lahir *</label>
+            <input type="date" id="tglLahir" required>
+            <div class="error-msg">Tanggal lahir wajib diisi.</div>
+          </div>
+          <div class="field full">
+            <label for="alamat">Alamat Lengkap *</label>
+            <textarea id="alamat" rows="3" required placeholder="Alamat domisili saat ini"></textarea>
+            <div class="error-msg">Alamat wajib diisi.</div>
+          </div>
+          <div class="field">
+            <label for="hp">Nomor HP / WhatsApp *</label>
+            <input type="text" id="hp" required inputmode="numeric" placeholder="08xxxxxxxxxx">
+            <div class="error-msg">Nomor HP tidak valid.</div>
+          </div>
+          <div class="field">
+            <label for="email">Alamat Email *</label>
+            <input type="email" id="email" required placeholder="nama@email.com">
+            <div class="error-msg">Format email tidak valid.</div>
+          </div>
+          <div class="field">
+            <label for="pendidikan">Pendidikan Terakhir *</label>
+            <select id="pendidikan" required>
+              <option value="">Pilih...</option>
+              <option>SMP/Sederajat</option>
+              <option>SMA/SMK</option>
+              <option>D3</option>
+              <option>S1</option>
+              <option>Lainnya</option>
+            </select>
+            <div class="error-msg">Pilih pendidikan terakhir.</div>
+          </div>
+        </div>
+
+        <h3 style="margin:26px 0 4px;">2. Program Pelatihan</h3>
+        <p style="font-size:.85rem;margin-bottom:20px;">Pilih program dan gelombang pelatihan yang Anda minati.</p>
+        <div class="form-grid">
+          <div class="field">
+            <label for="program">Program Pelatihan *</label>
+            <select id="program" required>
+              <option value="">Pilih program...</option>
+            </select>
+            <div class="error-msg">Pilih program pelatihan.</div>
+          </div>
+          <div class="field">
+            <label for="gelombang">Gelombang</label>
+            <select id="gelombang">
+              <option>Gelombang II - 2026</option>
+              <option>Gelombang III - 2026 (Menunggu Jadwal)</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label for="dokumen">Unggah Dokumen Pendukung (KTP/Ijazah — opsional)</label>
+            <input type="file" id="dokumen" accept=".pdf,.jpg,.jpeg,.png">
+            <div class="hint">Nama berkas akan dicatat di sistem. Untuk pengunggahan berkas ke server sungguhan, hubungkan formulir ini dengan backend Anda.</div>
+          </div>
+        </div>
+
+        <div class="field full" style="margin-top:10px;">
+          <label class="checkline">
+            <input type="checkbox" id="setuju" required>
+            <span>Saya menyatakan bahwa data yang saya isi adalah benar dan bersedia mengikuti seluruh ketentuan pelatihan LPK Universitas Muhammadiyah Maumere. *</span>
+          </label>
+          <div class="error-msg" id="errSetuju">Anda harus menyetujui pernyataan ini.</div>
+        </div>
+
+        <div style="display:flex;gap:12px;margin-top:10px;flex-wrap:wrap;">
+          <button type="submit" class="btn btn-gold">Kirim Pendaftaran →</button>
+          <button type="reset" class="btn btn-ghost">Bersihkan Formulir</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><img src="assets/logo-lpk.jpeg" alt="Logo LPK"><div class="name">LPK Universitas<br>Muhammadiyah Maumere</div></div>
+        <p style="font-size:.86rem;">Lembaga Pelatihan Kerja di bawah naungan Universitas Muhammadiyah Maumere, berkomitmen mencetak tenaga kerja kompeten dan berdaya saing.</p>
+        <div class="social-row"><a href="#">FB</a><a href="#">IG</a><a href="#">YT</a></div>
+      </div>
+      <div><h4>Navigasi</h4><ul><li><a href="index.html">Beranda</a></li><li><a href="tentang.html">Profil Lembaga</a></li><li><a href="skema.html">Program Pelatihan</a></li><li><a href="jadwal.html">Jadwal &amp; Prosedur</a></li></ul></div>
+      <div><h4>Layanan</h4><ul><li><a href="pendaftaran.html">Pendaftaran Online</a></li><li><a href="peserta.html">Portal Data Peserta</a></li><li><a href="kontak.html">Hubungi Kami</a></li></ul></div>
+      <div><h4>Alamat</h4><div class="contact-line">📍 Jl. Kesehatan, Kel. Kota Uneng, Kec. Alok, Kab. Sikka, Maumere, NTT</div><div class="contact-line">📞 (0382) 000-000</div><div class="contact-line">✉️ lpk@um-maumere.ac.id</div></div>
+    </div>
+    <div class="bottom-bar"><span>© <span class="tahun-berjalan"></span> LPK Universitas Muhammadiyah Maumere. Seluruh hak cipta dilindungi.</span></div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/main.js"></script>
+<script>
+  const selProgram = document.getElementById("program");
+  DAFTAR_PROGRAM.forEach(p => {
+    selProgram.innerHTML += `<option value="${p.nama}">${p.nama} (${p.kode})</option>`;
+  });
+
+  const form = document.getElementById("formPendaftaran");
+  const alertSukses = document.getElementById("alertSukses");
+  const alertGagal = document.getElementById("alertGagal");
+  const noPendaftaran = document.getElementById("noPendaftaran");
+
+  function tandaiError(id, salah){
+    const field = document.getElementById(id).closest(".field");
+    field.classList.toggle("error", salah);
+    return salah;
+  }
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    alertSukses.classList.remove("show");
+    alertGagal.classList.remove("show");
+
+    const nama = document.getElementById("nama").value.trim();
+    const nik = document.getElementById("nik").value.trim();
+    const jkel = document.getElementById("jkel").value;
+    const tempatLahir = document.getElementById("tempatLahir").value.trim();
+    const tglLahir = document.getElementById("tglLahir").value;
+    const alamat = document.getElementById("alamat").value.trim();
+    const hp = document.getElementById("hp").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const pendidikan = document.getElementById("pendidikan").value;
+    const program = document.getElementById("program").value;
+    const gelombang = document.getElementById("gelombang").value;
+    const dokumenInput = document.getElementById("dokumen");
+    const dokumen = dokumenInput.files[0] ? dokumenInput.files[0].name : "";
+    const setuju = document.getElementById("setuju").checked;
+
+    let adaError = false;
+    adaError = tandaiError("nama", nama === "") || adaError;
+    adaError = tandaiError("nik", !/^\d{16}$/.test(nik)) || adaError;
+    adaError = tandaiError("jkel", jkel === "") || adaError;
+    adaError = tandaiError("tempatLahir", tempatLahir === "") || adaError;
+    adaError = tandaiError("tglLahir", tglLahir === "") || adaError;
+    adaError = tandaiError("alamat", alamat === "") || adaError;
+    adaError = tandaiError("hp", !/^0\d{9,13}$/.test(hp)) || adaError;
+    adaError = tandaiError("email", !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) || adaError;
+    adaError = tandaiError("pendidikan", pendidikan === "") || adaError;
+    adaError = tandaiError("program", program === "") || adaError;
+    document.getElementById("errSetuju").style.display = setuju ? "none" : "block";
+    document.getElementById("setuju").closest(".field").classList.toggle("error", !setuju);
+    if(!setuju) adaError = true;
+
+    if(adaError){
+      alertGagal.classList.add("show");
+      alertGagal.scrollIntoView({behavior:"smooth", block:"center"});
+      return;
+    }
+
+    const saved = PesertaDB.tambah({
+      nama, nik, jkel, tempatLahir, tglLahir, alamat, hp, email,
+      pendidikan, program, gelombang, dokumen
+    });
+
+    noPendaftaran.textContent = saved.id;
+    alertSukses.classList.add("show");
+    alertSukses.scrollIntoView({behavior:"smooth", block:"center"});
+    form.reset();
+  });
+</script>
+</body>
+</html>
