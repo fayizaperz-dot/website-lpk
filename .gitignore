@@ -1,0 +1,11 @@
+# File sistem
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+!.vscode/settings.json
+
+# Node (jika nanti pakai live-server via npm)
+node_modules/
+package-lock.json

@@ -1,0 +1,15 @@
+{
+  "name": "lpk-universitas-muhammadiyah-maumere",
+  "version": "1.0.0",
+  "description": "Website Lembaga Pelatihan Kerja (LPK) Universitas Muhammadiyah Maumere — HTML, CSS, JavaScript murni.",
+  "private": true,
+  "scripts": {
+    "start": "live-server --port=5500 --open=index.html",
+    "dev": "live-server --port=5500 --open=index.html"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  },
+  "keywords": ["lpk", "pelatihan-kerja", "universitas-muhammadiyah-maumere"],
+  "license": "UNLICENSED"
+}
